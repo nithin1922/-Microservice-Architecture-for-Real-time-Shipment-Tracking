@@ -8,14 +8,6 @@ A microservices-based shipment tracking system designed for a logistics company.
 - [Architecture](#architecture)
 - [Features](#features)
 - [Technologies](#technologies)
-- [Project Structure](#project-structure)
-- [Setup & Installation](#setup--installation)
-  - [Local Development](#local-development)
-  - [Containerization with Docker](#containerization-with-docker)
-  - [Kubernetes Deployment on AWS](#kubernetes-deployment-on-aws)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Overview
 
