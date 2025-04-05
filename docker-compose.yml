@@ -1,0 +1,47 @@
+version: "3"
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      # Advertise the container name for inter-container communication.
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+  shipment-service:
+    build: ./shipment-service
+    ports:
+      - "3000:3000"
+    environment:
+      # Override broker setting for the containerized environment.
+      KAFKA_BROKER: kafka:9092
+    depends_on:
+      - kafka
+
+  tracking-service:
+    build: ./tracking-service
+    environment:
+      KAFKA_BROKER: kafka:9092
+      REDIS_HOST: redis        # Ensure this is set to the Redis service name
+      REDIS_PORT: 6379  
+    depends_on:
+      - kafka
+      - redis

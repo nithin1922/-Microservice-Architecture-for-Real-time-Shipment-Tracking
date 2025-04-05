@@ -1,0 +1,19 @@
+{
+  "name": "shipment-tracking",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "kafkajs": "^2.2.4",
+    "pip": "^0.0.1",
+    "python": "^0.0.4",
+    "redis": "^4.7.0"
+  }
+}
